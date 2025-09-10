@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:myapp/config/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:myapp/model/response/trip_idx_get_res.dart';
@@ -52,14 +54,21 @@ class _TripPageState extends State<TripPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              tripIdx.name,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    tripIdx.name,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text("ประเทศ ${tripIdx.country}"),
+                                ],
                               ),
                             ),
-                            Text("ประเทศ ${tripIdx.country}"),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(
                                 10,
@@ -93,12 +102,30 @@ class _TripPageState extends State<TripPage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("ราคา ${tripIdx.price} บาท"),
-                                  Text(tripIdx.destinationZone),
+                                  Text(
+                                    "ราคา ${tripIdx.price} บาท",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    tripIdx.destinationZone,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            Text(tripIdx.detail),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                              ),
+                              child: Text(tripIdx.detail),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                 top: 20,
@@ -108,7 +135,14 @@ class _TripPageState extends State<TripPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   FilledButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Get.defaultDialog(
+                                        title: "จองสำเร็จ",
+                                        content: SizedBox.shrink(),
+                                        textCancel: "ตกลง",
+                                        onCancel: () {},
+                                      );
+                                    },
                                     child: Text("จองเลย"),
                                   ),
                                 ],
